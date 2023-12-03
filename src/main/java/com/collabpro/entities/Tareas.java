@@ -3,14 +3,15 @@ package com.collabpro.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="tareas")
 public class Tareas {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="idtareas")
-    private int idtareas;
+    @Column(name="tarea_id")
+    private int tareaId;
     @Column(name="nombre")
     private String nombre;
     @Column(name="descripcion")
@@ -24,22 +25,22 @@ public class Tareas {
 
 
 
-    //Relaciones
+    //Relaciones salientes
     @ManyToOne
-    @JoinColumn(name = "idproyecto")
-    private Proyectos idproyecto;
-
+    @JoinColumn(name = "proyecto_id")
+    private Proyectos proyecto;
     @ManyToOne
     @JoinColumn(name = "asignado_a")
     private Usuarios asignadoA;
 
-    //Constructores
+    //Relaciones Entrantes
+    @OneToMany(mappedBy = "tarea", cascade = CascadeType.ALL)
+    private List<Comentarios> comentarios;
 
+    //Constructores
     public Tareas() {
     }
-
-    public Tareas(int idtareas, String nombre, String descripcion, Date fecha_inicio, Date fecha_fin, String estado) {
-        this.idtareas = idtareas;
+    public Tareas(String nombre, String descripcion, Date fecha_inicio, Date fecha_fin, String estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha_inicio = fecha_inicio;
@@ -50,11 +51,11 @@ public class Tareas {
     //Getters y Setters
 
     public int getIdtareas() {
-        return idtareas;
+        return tareaId;
     }
 
     public void setIdtareas(int idtareas) {
-        this.idtareas = idtareas;
+        this.tareaId = tareaId;
     }
 
     public String getNombre() {

@@ -30,6 +30,7 @@ public class ServiceProyectos {
     public Proyectos crearProyecto(String nombre, String descripcion, Date fecha_inicio, Date fecha_fin, Usuarios liderProyecto){
 
         Proyectos proyecto = new Proyectos();
+
         proyecto.setNombre(nombre);
         proyecto.setDescripcion(descripcion);
         proyecto.setFecha_inicio(fecha_inicio);

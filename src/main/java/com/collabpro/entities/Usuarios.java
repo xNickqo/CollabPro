@@ -9,9 +9,9 @@ import java.util.Set;
 @Table(name="usuarios")
 public class Usuarios {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="idusuarios")
-    private int idusuarios;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "usuario_id")
+    private int usuarioId;
     @Column(name="nombre")
     private String nombre;
     @Column(name="correo")
@@ -20,11 +20,11 @@ public class Usuarios {
     private String contraseña;
 
 
-    @OneToMany(mappedBy = "liderProyecto")
+    @OneToMany(mappedBy = "liderProyecto", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
     private List<Proyectos> proyectosLiderados;
-    @ManyToMany(mappedBy = "usuariosAsignados")
-    private List<Tareas> tareasAsignadas;
 
+    @OneToMany(mappedBy = "asignadoA", cascade = CascadeType.ALL)
+    private List<Tareas> tareasAsignadas;
 
     //Constructores
     public Usuarios() {
@@ -36,12 +36,14 @@ public class Usuarios {
     }
 
     //Getters y Setters
-    public int getIdusuarios() {
-        return idusuarios;
+
+
+    public int getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setIdusuarios(int id) {
-        this.idusuarios = id;
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public String getNombre() {
@@ -68,6 +70,7 @@ public class Usuarios {
         this.contraseña = contraseña;
     }
 
+
     public List<Proyectos> getProyectosLiderados() {
         return proyectosLiderados;
     }
@@ -75,4 +78,14 @@ public class Usuarios {
     public void setProyectosLiderados(List<Proyectos> proyectosLiderados) {
         this.proyectosLiderados = proyectosLiderados;
     }
+
+    public List<Tareas> getTareasAsignadas() {
+        return tareasAsignadas;
+    }
+
+    public void setTareasAsignadas(List<Tareas> tareasAsignadas) {
+        this.tareasAsignadas = tareasAsignadas;
+    }
+
+
 }

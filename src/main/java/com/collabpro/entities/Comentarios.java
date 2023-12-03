@@ -9,8 +9,8 @@ import java.util.Date;
 public class Comentarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idcomentarios")
-    private int idcomentarios;
+    @Column(name="comentario_id")
+    private int comentariosId;
     @Column(name="contenido")
     private String contenido;
     @Column(name="fecha_creacion")
@@ -19,16 +19,16 @@ public class Comentarios {
     //Relaciones
 
     @ManyToOne
-    @JoinColumn(name = "idusuarios")
-    private Usuarios idusuarios;
+    @JoinColumn(name = "usuario_id")
+    private Usuarios usuario;
 
     @ManyToOne
-    @JoinColumn(name = "idproyectos")
-    private Proyectos idproyectos;
+    @JoinColumn(name = "proyecto_id")
+    private Proyectos proyecto;
 
     @ManyToOne
-    @JoinColumn(name = "idtareas")
-    private Tareas idtareas;
+    @JoinColumn(name = "tarea_id")
+    private Tareas tarea;
 
 
     //Constructores
@@ -36,22 +36,19 @@ public class Comentarios {
     public Comentarios() {
     }
 
-    public Comentarios(int idcomentarios, String contenido, Date fecha_creacion) {
-        this.idcomentarios = idcomentarios;
+    public Comentarios(String contenido, Date fecha_creacion) {
         this.contenido = contenido;
         this.fecha_creacion = fecha_creacion;
     }
 
     //Getters and Setters
 
-    public int getIdcomentarios() {
-        return idcomentarios;
+    public int getComentariosId() {
+        return comentariosId;
     }
-
-    public void setIdcomentarios(int idcomentarios) {
-        this.idcomentarios = idcomentarios;
+    public void setComentariosId(int comentariosId) {
+        this.comentariosId = comentariosId;
     }
-
     public String getContenido() {
         return contenido;
     }
@@ -66,5 +63,30 @@ public class Comentarios {
 
     public void setFecha_creacion(Date fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
+    }
+
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    public Proyectos getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyectos proyecto) {
+        this.proyecto = proyecto;
+    }
+
+    public Tareas getTarea() {
+        return tarea;
+    }
+
+    public void setTarea(Tareas tarea) {
+        this.tarea = tarea;
     }
 }

@@ -2,13 +2,15 @@ package com.collabpro.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "equipos")
 public class Equipos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idequipos")
-    private int idequipos;
+    @Column(name = "equipo_id")
+    private int equipoId;
     @Column(name = "rol")
     private String rol;
 
@@ -16,33 +18,37 @@ public class Equipos {
     //Relaciones
 
     @ManyToOne
-    @JoinColumn(name = "idusuarios")
-    private Usuarios idusuario;
+    @JoinColumn(name = "usuario_id")
+    private Usuarios usuario;
 
     @ManyToOne
-    @JoinColumn(name = "idproyectos")
-    private Proyectos idproyecto;
+    @JoinColumn(name = "proyecto_id")
+    private Proyectos proyecto;
 
 
 
 
     //Constructores
 
+
     public Equipos() {
     }
 
-    public Equipos(String rol) {
+    public Equipos(String rol, Usuarios usuario, Proyectos proyecto) {
         this.rol = rol;
+        this.usuario = usuario;
+        this.proyecto = proyecto;
     }
+
 
     //Getters y Setters
 
-    public int getIdequipos() {
-        return idequipos;
+    public int getEquipoId() {
+        return equipoId;
     }
 
-    public void setIdequipos(int idequipos) {
-        this.idequipos = idequipos;
+    public void setEquipoId(int equipoId) {
+        this.equipoId = equipoId;
     }
 
     public String getRol() {
@@ -53,5 +59,19 @@ public class Equipos {
         this.rol = rol;
     }
 
+    public Usuarios getUsuario() {
+        return usuario;
+    }
 
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    public Proyectos getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyectos proyecto) {
+        this.proyecto = proyecto;
+    }
 }

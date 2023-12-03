@@ -10,8 +10,8 @@ import java.util.List;
 public class Proyectos {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="idproyectos")
-    private int idproyectos;
+    @Column(name="proyecto_id")
+    private int proyectoId;
     @Column(name="nombre")
     private String nombre;
     @Column(name="descripcion")
@@ -22,13 +22,19 @@ public class Proyectos {
     private Date fecha_fin;
 
 
-    //Relaciones
+    //Relaciones salientes
     @ManyToOne
     @JoinColumn(name = "lider_proyecto_id")
     private Usuarios liderProyecto;
 
-    @OneToMany(mappedBy = "proyecto")
+
+    //Relaciones entrantes
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.ALL)
     private List<Tareas> tareas;
+
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.ALL)
+    private List<Comentarios> comentarios;
+
 
     //Constructores
     public Proyectos(String nombre, String descripcion, Date fecha_inicio, Date fecha_fin) {
@@ -41,14 +47,23 @@ public class Proyectos {
     public Proyectos() {
     }
 
-    //Getters y setters
-
-    public int getIdproyectos() {
-        return idproyectos;
+    public Proyectos(String nombre, String descripcion, Date fecha_inicio, Date fecha_fin, Usuarios liderProyecto) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_fin = fecha_fin;
+        this.liderProyecto = liderProyecto;
     }
 
-    public void setIdproyectos(int idproyectos) {
-        this.idproyectos = idproyectos;
+    //Getters y setters
+
+
+    public int getProyectoId() {
+        return proyectoId;
+    }
+
+    public void setProyectoId(int proyectoId) {
+        this.proyectoId = proyectoId;
     }
 
     public String getNombre() {
@@ -90,5 +105,35 @@ public class Proyectos {
 
     public void setLiderProyecto(Usuarios liderProyecto) {
         this.liderProyecto = liderProyecto;
+    }
+
+    public List<Tareas> getTareas() {
+        return tareas;
+    }
+
+    public void setTareas(List<Tareas> tareas) {
+        this.tareas = tareas;
+    }
+
+    public List<Comentarios> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentarios> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+
+    //ToString
+
+    @Override
+    public String toString() {
+        return "Proyectos{" +
+                "nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fecha_inicio=" + fecha_inicio +
+                ", fecha_fin=" + fecha_fin +
+                ", liderProyecto=" + liderProyecto +
+                '}';
     }
 }
