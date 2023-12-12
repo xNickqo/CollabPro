@@ -10,12 +10,8 @@ import java.util.Date;
 
 @Component
 public class InizializadorDatos implements CommandLineRunner {
-
     private final ServiceUsuarios serviceUsuarios;
-
     private final ServiceProyectos serviceProyectos;
-
-
     public InizializadorDatos(ServiceUsuarios serviceUsuarios, ServiceProyectos serviceProyectos) {
         this.serviceUsuarios = serviceUsuarios;
         this.serviceProyectos = serviceProyectos;
@@ -23,20 +19,29 @@ public class InizializadorDatos implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //metodo para agregar usuarios a la base de datos
-        //serviceUsuarios.ingresarUsuario("Nicolas", "nikolaslf007@gmail.com","123");
+        //ELIMINAR USUARIO
+        //serviceUsuarios.eliminarUsuario(3);
 
 
-        //metodo crear proyecto
-        /*Usuarios liderProyecto = serviceUsuarios.buscarUsuarioPorId(1);
+        //AGREGAR USUARIO
+        //serviceUsuarios.ingresarUsuario("Javier", "javier@gmail.com","123");
+
+
+        //CREAR PROYECTO
+        /*Usuarios liderProyecto = serviceUsuarios.buscarUsuarioPorId(5);
         serviceProyectos.crearProyecto(
-                "Proyecto Spring JPA",
-                "Es un proyecto en el que se aprende Spring JPA",
+                "Proyecto Manolo",
+                "Proyecto personal del SR Manolo",
                 new Date(2023,01,12),
                 new Date(2023,06,12),
-                liderProyecto );        */
+                liderProyecto );*/
 
-        //Metodo para obtener los proyectos asociados a un usuario
+
+        //ELIMINAR PROYECTO
+        //serviceProyectos.eliminarProyecto(8);
+
+
+        //PROYECTOS ASOCIADOS A UN USUARIO POR SU ID
         //serviceUsuarios.obtenerProyectosAsociados(1);
     }
 }

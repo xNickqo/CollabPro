@@ -2,12 +2,10 @@ package com.collabpro.services;
 
 import com.collabpro.entities.Proyectos;
 import com.collabpro.entities.Usuarios;
+import com.collabpro.repository.ProyectosRepository;
 import com.collabpro.repository.UsuariosRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,9 +13,11 @@ import java.util.List;
 public class ServiceUsuarios {
 
     private final UsuariosRepository usuariosRepository;
+    private final ProyectosRepository proyectosRepository;
     @Autowired
-    public ServiceUsuarios(UsuariosRepository usuariosRepository) {
+    public ServiceUsuarios(UsuariosRepository usuariosRepository, ProyectosRepository proyectosRepository) {
         this.usuariosRepository = usuariosRepository;
+        this.proyectosRepository = proyectosRepository;
     }
 
     public List<Proyectos> obtenerProyectosAsociados(int idUsuario) {
@@ -40,7 +40,7 @@ public class ServiceUsuarios {
 
         //Este metodo es para buscar objetos usuario por ID
     public Usuarios buscarUsuarioPorId(int usuarioId){
-        return usuariosRepository.findById(1);
+        return usuariosRepository.findById(usuarioId);
     }
 
 
@@ -58,6 +58,23 @@ public class ServiceUsuarios {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error al ingresar el usuario: " + e.getMessage());
+        }
+    }
+
+    //Este metodo eliminar un usuario a la base de datos
+    public void eliminarUsuario(int usuarioId){
+        Usuarios usuario = usuariosRepository.findById(usuarioId);
+
+        try {
+            if (usuario!=null) {
+                usuario.getProyectosLiderados().forEach(proyectosRepository::delete);
+                usuariosRepository.delete(usuario);
+                System.out.println("Usuario eliminado: " + usuario.getNombre());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al eliminar el usuario: " + e.getMessage());
         }
     }
 }
