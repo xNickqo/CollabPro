@@ -20,6 +20,11 @@ public class ServiceUsuarios {
         this.proyectosRepository = proyectosRepository;
     }
 
+
+
+
+
+
     public List<Proyectos> obtenerProyectosAsociados(int idUsuario) {
         // Obtener el usuario por ID
         Usuarios usuario = usuariosRepository.findById(idUsuario);
