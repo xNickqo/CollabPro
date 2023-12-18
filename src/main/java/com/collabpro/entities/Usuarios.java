@@ -29,6 +29,17 @@ public class Usuarios {
     @OneToMany(mappedBy = "asignadoA", cascade = CascadeType.ALL)
     private List<Tareas> tareasAsignadas;
 
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuarios_roles",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Roles> roles;
+
+
+
     //Constructores
     public Usuarios() {
     }
