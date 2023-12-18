@@ -6,49 +6,41 @@
 </head>
 <body>
 <section >
-    <div >
-        <div >
-            <div th:if=${param.logout}>
-                Se ha cerrado sesion correctamente
-            </div>
-            <div th:if=${param.error}>
-                Error al introducir los datos
-            </div>
-            <div >
-                <div style="border-radius: 1rem;">
+                <div>
                     <div >
-
                         <div >
+
+                            <p th:text="${error}"></p>
 
                             <h2>Login</h2>
                             <p>Ingresa tu email y contraseña</p>
 
-                            <form th:action="@{/login}" method="post" >
+                            <form th:action="@{/collabpro/login}" th:method="POST" >
                                 <div >
-                                    <label for="correo">Email</label>
-                                    <input name="correo" type="email" id="correo"  required autofocus="autofocus" />
+                                    <label >Email</label>
+                                    <input name="correo" type="email"   required autofocus="autofocus" />
                                 </div>
 
                                 <div>
-                                    <label for="contraseña">Contraseña</label>
-                                    <input name="contraseña" type="password" id="contraseña"   required autofocus="autofocus"/>
+                                    <label >Contraseña</label>
+                                    <input name="contraseña" type="password"  required />
                                 </div>
 
-                                <button type="submit" id="login-submit" value="Login">Login</button>
+                                <button type="submit" >Login</button>
 
                             </form>
                         </div>
 
+
                         <div>
-                            <p>No tienes cuenta? <a th:href="@{/registro}" >Registrate</a>
+                            <p>No tienes cuenta? <a th:href="@{/collabpro/registro}" >Registrate</a>
                             </p>
                         </div>
 
+
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+
 </section>
 </body>
 </html>

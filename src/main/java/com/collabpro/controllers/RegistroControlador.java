@@ -1,44 +1,37 @@
 package com.collabpro.controllers;
 
 import com.collabpro.entities.Usuarios;
+import com.collabpro.repository.UsuariosRepository;
 import com.collabpro.services.ServiceUsuarios;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/registro")
+@RequestMapping("/collabpro/registro")
 public class RegistroControlador {
-    private ServiceUsuarios usuarioServicio;
-    public RegistroControlador(ServiceUsuarios usuarioServicio) {
-        this.usuarioServicio = usuarioServicio;
 
-    }
+    @Autowired
+    private ServiceUsuarios serviceUsuarios;
 
-    @ModelAttribute("usuario")
-    public Usuarios devolverNuevoUsuario(){
+    @PostMapping
+    public String procesarFormulario(@RequestParam String nombre,
+                                     @RequestParam String correo,
+                                     @RequestParam String contraseña,
+                                     Model model){
 
-        return new Usuarios();
-    }
+        String mensaje = serviceUsuarios.registrarUsuario(nombre, correo, contraseña);
 
-    @GetMapping
-    public String mostrarFormulario(){
+        model.addAttribute("mensaje", mensaje);
 
         return "registro";
     }
 
-    @PostMapping
-    public String registrarCuentaUsuario(@ModelAttribute("usuario") Usuarios usuario){
-        //Encriptar la contraseña antes de guardarla
-
-        //String contraseñaEncriptada = passwordEncoder.encode(usuario.getContraseña());
-        //usuario.setContraseña(contraseñaEncriptada);
-
-        usuarioServicio.guardarUsuario(usuario);
-        return "redirect:/registro?exito";
+    @GetMapping
+    public String verRegistro(){
+        return "registro";
     }
+
 
 }

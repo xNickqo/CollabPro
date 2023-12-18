@@ -5,6 +5,17 @@
     <title>CollabPro</title>
 </head>
 <body>
+
 <h1>Bienvenidos a CollabPro</h1>
+
+<div th:if="${usuarioAutenticado}">
+    <p th:text="${'¡Hola, ' + usuarioAutenticado.nombre + '!'}"></p>
+    <!-- Puedes mostrar más información sobre el usuario según tus necesidades -->
+</div>
+
+
+<a th:href="@{/collabpro/logout}">Logout</a>
+<p th:if="${param.logout}" th:text="${'Te has desconectado exitosamente.'}"></p>
+
 </body>
 </html>

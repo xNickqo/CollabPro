@@ -24,8 +24,11 @@ public class InizializadorDatos implements CommandLineRunner {
 
 
         //AGREGAR USUARIO
-        //serviceUsuarios.ingresarUsuario("Javier", "javier@gmail.com","123");
-
+        /*Usuarios usuario = new Usuarios();
+        usuario.setNombre("carmen");
+        usuario.setCorreo("carmensita@gmail.com");
+        usuario.setContraseña("123");
+        serviceUsuarios.ingresarUsuario(usuario);*/
 
         //CREAR PROYECTO
         /*Usuarios liderProyecto = serviceUsuarios.buscarUsuarioPorId(5);

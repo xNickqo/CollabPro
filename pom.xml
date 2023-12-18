@@ -14,7 +14,6 @@
     <name>CollabPro</name>
     <description>CollabPro</description>
     <properties>
-        <springsecurity.version>6.2.0</springsecurity.version>
         <java.version>17</java.version>
     </properties>
     <dependencies>
@@ -83,19 +82,8 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- SPRING SECURITY WEB -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${springsecurity.version}</version>
-        </dependency>
 
-        <!-- spring-security-config -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${springsecurity.version}</version>
-        </dependency>
+
 
 
     </dependencies>

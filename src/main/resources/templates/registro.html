@@ -10,35 +10,33 @@
   <div >
     <div >
       <div >
-        <div th:if=${param.exito}>
-          <div>
-            Se ha registrado exitosamente a la aplicacion
-          </div></div>
+
+          <p th:text="${mensaje}"></p>
 
           <h2>Registrate</h2>
 
-          <form th:action="@{/registro}" method="post" th:object="${usuario}">
+          <form th:action="@{/collabpro/registro}" th:method="POST" >
 
             <div>
-              <label for="nombre">Nombre: </label>
-              <input id="nombre" type="text" th:field="*{nombre}" required autofocus="autofocus">
+              <label>Nombre: </label>
+              <input name="nombre" type="text" required autofocus="autofocus">
             </div>
 
             <div >
-              <label for="correo">Correo : </label>
-              <input id="correo" type="email" th:field="*{correo}" required autofocus="autofocus">
+              <label>Correo : </label>
+              <input name="correo" type="email" required >
             </div>
 
             <div >
-              <label for="contraseña">Contraseña: </label>
-              <input id="contraseña" type="password" th:field="*{contraseña}" required autofocus="autofocus">
+              <label>Contraseña: </label>
+              <input name="contraseña" type="password" required >
             </div>
 
             <div>
 
               <button type="submit" >Registrar</button>
 
-              <span>Si estas registrado <a th:href="@{/login}">Inicia sesión aqui</a></span>
+              <span>Si estas registrado <a th:href="@{/collabpro/login}">Inicia sesión aqui</a></span>
             </div>
 
           </form>
