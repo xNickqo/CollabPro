@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registro")
 public class RegistroControlador {
     private ServiceUsuarios usuarioServicio;
-    private PasswordEncoder passwordEncoder;
-    public RegistroControlador(ServiceUsuarios usuarioServicio, PasswordEncoder passwordEncoder) {
+    public RegistroControlador(ServiceUsuarios usuarioServicio) {
         this.usuarioServicio = usuarioServicio;
-        this.passwordEncoder = passwordEncoder;
+
     }
 
     @ModelAttribute("usuario")
@@ -34,8 +33,9 @@ public class RegistroControlador {
     @PostMapping
     public String registrarCuentaUsuario(@ModelAttribute("usuario") Usuarios usuario){
         //Encriptar la contraseña antes de guardarla
-        String contraseñaEncriptada = passwordEncoder.encode(usuario.getContraseña());
-        usuario.setContraseña(contraseñaEncriptada);
+
+        //String contraseñaEncriptada = passwordEncoder.encode(usuario.getContraseña());
+        //usuario.setContraseña(contraseñaEncriptada);
 
         usuarioServicio.guardarUsuario(usuario);
         return "redirect:/registro?exito";
