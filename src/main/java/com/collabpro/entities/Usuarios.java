@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -33,10 +34,10 @@ public class Usuarios {
     @ManyToMany
     @JoinTable(
             name = "usuarios_roles",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "rol_id")
     )
-    private Set<Roles> roles;
+    private List<Roles> roles = new ArrayList<>();
 
 
 
@@ -50,7 +51,6 @@ public class Usuarios {
     }
 
     //Getters y Setters
-
 
     public int getUsuarioId() {
         return usuarioId;
@@ -92,6 +92,16 @@ public class Usuarios {
     public void setProyectosLiderados(List<Proyectos> proyectosLiderados) {
         this.proyectosLiderados = proyectosLiderados;
     }
+
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
+    }
+
 
     public List<Tareas> getTareasAsignadas() {
         return tareasAsignadas;
