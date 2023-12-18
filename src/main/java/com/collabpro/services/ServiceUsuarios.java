@@ -5,12 +5,15 @@ import com.collabpro.entities.Usuarios;
 import com.collabpro.repository.ProyectosRepository;
 import com.collabpro.repository.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ServiceUsuarios {
+public class ServiceUsuarios{
 
     private final UsuariosRepository usuariosRepository;
     private final ProyectosRepository proyectosRepository;
@@ -20,11 +23,33 @@ public class ServiceUsuarios {
         this.proyectosRepository = proyectosRepository;
     }
 
+    //INGRESAR USUARIO A LA BBDD
+    public void ingresarUsuario(String nombre, String correo, String contraseña){
+        Usuarios usuario = new Usuarios();
+        usuario.setNombre(nombre);
+        usuario.setCorreo(correo);
+        usuario.setContraseña(contraseña);
 
+        try {
+            usuariosRepository.save(usuario);
+            System.out.println("Usuario ingresado: " + usuario.getNombre());
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al ingresar el usuario: " + e.getMessage());
+        }
+    }
 
+    //GUARDAR USUARIO
+    public Usuarios guardarUsuario(Usuarios usuario){
+        usuario.getNombre();
+        usuario.getCorreo();
+        usuario.getContraseña();
 
+        return usuariosRepository.save(usuario);
+    }
 
+    //OBTENER PROYECTOS ASOCIADOS A UN USUARIO(IDUSUARIO)
     public List<Proyectos> obtenerProyectosAsociados(int idUsuario) {
         // Obtener el usuario por ID
         Usuarios usuario = usuariosRepository.findById(idUsuario);
@@ -43,30 +68,15 @@ public class ServiceUsuarios {
         }
     }
 
-        //Este metodo es para buscar objetos usuario por ID
+
+    //Este metodo es para buscar objetos usuario por ID
     public Usuarios buscarUsuarioPorId(int usuarioId){
         return usuariosRepository.findById(usuarioId);
     }
 
 
-    //Este metodo ingresa un usuario a la base de datos
-    public void ingresarUsuario(String nombre, String correo, String contraseña){
-        Usuarios usuario = new Usuarios();
-        usuario.setNombre(nombre);
-        usuario.setCorreo(correo);
-        usuario.setContraseña(contraseña);
 
-        try {
-            usuariosRepository.save(usuario);
-            System.out.println("Usuario ingresado: " + usuario.getNombre());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error al ingresar el usuario: " + e.getMessage());
-        }
-    }
-
-    //Este metodo eliminar un usuario a la base de datos
+    //ELIMINAR USUARIO
     public void eliminarUsuario(int usuarioId){
         Usuarios usuario = usuariosRepository.findById(usuarioId);
 
@@ -82,4 +92,7 @@ public class ServiceUsuarios {
             System.out.println("Error al eliminar el usuario: " + e.getMessage());
         }
     }
+
+
+
 }

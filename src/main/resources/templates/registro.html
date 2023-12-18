@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+
+</head>
+<body>
+
+  <div >
+    <div >
+      <div >
+        <div th:if=${param.exito}>
+          <div>
+            Se ha registrado exitosamente a la aplicacion
+          </div></div>
+
+          <h2>Registrate</h2>
+
+          <form th:action="@{/registro}" method="post" th:object="${usuario}">
+
+            <div>
+              <label for="nombre">Nombre: </label>
+              <input id="nombre" type="text" th:field="*{nombre}" required autofocus="autofocus">
+            </div>
+
+            <div >
+              <label for="correo">Correo : </label>
+              <input id="correo" type="email" th:field="*{correo}" required autofocus="autofocus">
+            </div>
+
+            <div >
+              <label for="contraseña">Contraseña: </label>
+              <input id="contraseña" type="password" th:field="*{contraseña}" required autofocus="autofocus">
+            </div>
+
+            <div>
+
+              <button type="submit" >Registrar</button>
+
+              <span>Si estas registrado <a th:href="@{/login}">Inicia sesión aqui</a></span>
+            </div>
+
+          </form>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
