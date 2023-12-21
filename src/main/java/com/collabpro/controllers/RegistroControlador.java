@@ -1,44 +1,34 @@
 package com.collabpro.controllers;
 
+import com.collabpro.datos.DatosRegistro;
+import com.collabpro.entities.Roles;
 import com.collabpro.entities.Usuarios;
+import com.collabpro.repository.RolesRepository;
+import com.collabpro.repository.UsuariosRepository;
+import com.collabpro.security.JwtGenerator;
 import com.collabpro.services.ServiceUsuarios;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @Controller
-@RequestMapping("/registro")
+@RequestMapping("/api/auth/registro")
 public class RegistroControlador {
-    private ServiceUsuarios usuarioServicio;
-    public RegistroControlador(ServiceUsuarios usuarioServicio) {
-        this.usuarioServicio = usuarioServicio;
-
-    }
 
     @ModelAttribute("usuario")
     public Usuarios devolverNuevoUsuario(){
-
         return new Usuarios();
     }
 
     @GetMapping
     public String mostrarFormulario(){
-
         return "registro";
-    }
-
-    @PostMapping
-    public String registrarCuentaUsuario(@ModelAttribute("usuario") Usuarios usuario){
-        //Encriptar la contraseña antes de guardarla
-
-        //String contraseñaEncriptada = passwordEncoder.encode(usuario.getContraseña());
-        //usuario.setContraseña(contraseñaEncriptada);
-
-        usuarioServicio.guardarUsuario(usuario);
-        return "redirect:/registro?exito";
     }
 
 }
